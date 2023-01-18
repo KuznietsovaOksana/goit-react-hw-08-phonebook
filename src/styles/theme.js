@@ -4,6 +4,7 @@ export const theme = Object.freeze({
     grey: '#9e9e9e',
     light: '#f2f2f2',
     dark: '#212121',
+    accent: '#dc1818',
   },
   fontSizes: {
     small: '14px',

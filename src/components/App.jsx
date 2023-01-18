@@ -1,43 +1,68 @@
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyleComponent } from 'styles/GlobalStyles';
 import { theme } from 'styles/theme';
-
-import { Container } from './Container/Container.styled';
-import { MainTitle } from './MainTitle/MainTitle';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Title } from './Title/Title';
-import { Filter } from './Filter/Filter';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { lazy } from 'react';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
-import { ContactList } from './ContactList/ContactList';
-import { selectError, selectIsLoading } from 'redux/selectors';
+import { Routes, Route } from 'react-router-dom';
+import { PrivateRoute } from 'utils/PrivateRoute';
+import { RestrictedRoute } from 'utils/RestrictedRoute';
+import { useAuth } from 'hooks/useAuth';
+import { refreshUser } from 'redux/auth/operations';
+import { Layout } from './Layout/Layout';
+
+const HomePage = lazy(() => import('../pages/Home/Home'));
+const RegisterPage = lazy(() => import('../pages/Register/Register'));
+const LoginPage = lazy(() => import('../pages/Login/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <ThemeProvider theme={theme}>
-      <Container>
-        <MainTitle title="Phonebook ☎" />
-        <ContactForm />
-        <Title title="Contacts 📞" />
-        <Filter />
-        {(isLoading && !error && (
-          <>
-            <br />
-            <b>Request in progress...</b>
-          </>
-        )) || <ContactList />}
-        <GlobalStyleComponent />
-      </Container>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+          <Route path="*" element={<HomePage />} />
+        </Route>
+      </Routes>
+      <GlobalStyleComponent />
     </ThemeProvider>
   );
 };

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import { List, Item, Text, Button } from './ContactList.styled';
-import { selectVisibleContacts } from 'redux/selectors';
+import { selectVisibleContacts } from 'redux/contacts/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,10 @@ export const ContactList = () => {
 
   return (
     <List>
-      {contacts.map(({ id, name, phone }) => (
+      {contacts.map(({ id, name, number }) => (
         <Item key={id}>
           <Text>
-            {name}: {phone}{' '}
+            {name}: {number}{' '}
           </Text>
           <Button
             type="button"
