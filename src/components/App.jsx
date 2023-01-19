@@ -1,6 +1,3 @@
-import { ThemeProvider } from '@mui/material/styles';
-import { GlobalStyleComponent } from 'styles/GlobalStyles';
-import { theme } from 'styles/theme';
 import { lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -26,14 +23,10 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
-
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <ThemeProvider theme={theme}>
+    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -65,7 +58,6 @@ export const App = () => {
         </Route>
       </Routes>
       <ToastContainer autoClose={3000} closeButton={false} />
-      <GlobalStyleComponent />
-    </ThemeProvider>
+    </>
   );
 };
