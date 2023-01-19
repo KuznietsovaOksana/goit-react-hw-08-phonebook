@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyleComponent } from 'styles/GlobalStyles';
 import { theme } from 'styles/theme';
 import { lazy } from 'react';

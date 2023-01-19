@@ -1,6 +1,6 @@
+import { Button, List, ListItem, ListItemText } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
-import { List, Item, Text, Button } from './ContactList.styled';
 import { selectVisibleContacts } from 'redux/contacts/selectors';
 
 export const ContactList = () => {
@@ -12,12 +12,14 @@ export const ContactList = () => {
   return (
     <List>
       {contacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          <Text>
-            {name}: {number}{' '}
-          </Text>
+        <ListItem key={id}>
+          <ListItemText>
+            {name}: {number}
+          </ListItemText>
           <Button
+            variant="contained"
             type="button"
+            size="small"
             onClick={() => {
               const action = deleteContact(id);
               dispatch(action);
@@ -25,7 +27,7 @@ export const ContactList = () => {
           >
             delete
           </Button>
-        </Item>
+        </ListItem>
       ))}
     </List>
   );

@@ -28,6 +28,7 @@ li {
 
 a {
   text-decoration:none;
+	color: inherit;
 }
 
 .visually-hidden {
@@ -44,6 +45,6 @@ a {
 }
 
 body{
-	background-color: ${({ theme }) => theme.colors.light};
+	font-family: Roboto, sans-serif;
 }
 `;

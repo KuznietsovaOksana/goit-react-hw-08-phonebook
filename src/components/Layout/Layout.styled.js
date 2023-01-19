@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-export const Box = styled.div`
-  color: black;
-`;
+// export const Box = styled.div`
+//   color: black;
+// `;

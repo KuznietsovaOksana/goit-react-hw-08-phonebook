@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { Wrapper, Input, Label, Button } from './ContactForm.styled';
 import { selectContacts } from 'redux/contacts/selectors';
+import { Box, Button, TextField } from '@mui/material';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -36,30 +36,51 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Wrapper>
-        <Label htmlFor="name">Name</Label>
-        <Input
+    <Box component="form" onSubmit={handleSubmit}>
+      <div>
+        <TextField
+          required
+          label="Name"
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          margin="normal"
+          fullWidth
+          inputProps={{
+            pattern:
+              "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+          }}
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
           onChange={inputChange}
         />
-      </Wrapper>
-      <Wrapper>
-        <Label htmlFor="number">Phone number</Label>
-        <Input
+      </div>
+      <div>
+        <TextField
+          required
+          label="Phone number"
           type="tel"
           name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          margin="normal"
+          fullWidth
+          inputProps={{
+            pattern:
+              '\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}',
+          }}
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
           onChange={inputChange}
         />
-      </Wrapper>
-      <Button type="submit"> Create </Button>
-    </form>
+      </div>
+      <Button
+        variant="contained"
+        size="large"
+        type="submit"
+        fullWidth
+        sx={{
+          mt: '24px',
+          mb: '24px',
+        }}
+      >
+        Create
+      </Button>
+    </Box>
   );
 };

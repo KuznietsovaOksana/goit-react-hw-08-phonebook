@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
-import { Heading } from './Title.styled';
+import { Typography } from '@mui/material';
 
 export const Title = ({ title }) => {
-  return <Heading>{title}</Heading>;
+  return (
+    <Typography variant="h4" component="h2" color="secondary">
+      {title}
+    </Typography>
+  );
 };
 
 Title.propTypes = {
