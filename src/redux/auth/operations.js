@@ -20,7 +20,6 @@ export const register = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      toast.error('Something went wrong! Please try again!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -35,7 +34,6 @@ export const logIn = createAsyncThunk(
       toast.info('You are welcome');
       return res.data;
     } catch (error) {
-      toast.error('Something went wrong! Please try again!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -67,7 +65,6 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get('/users/current');
       return res.data;
     } catch (error) {
-      toast.error('Something went wrong! Please try again!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
