@@ -10,6 +10,7 @@ import { RestrictedRoute } from 'utils/RestrictedRoute';
 import { useAuth } from 'hooks/useAuth';
 import { refreshUser } from 'redux/auth/operations';
 import { Layout } from './Layout/Layout';
+import { ToastContainer } from 'react-toastify';
 
 const HomePage = lazy(() => import('../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../pages/Register/Register'));
@@ -62,6 +63,7 @@ export const App = () => {
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
+      <ToastContainer autoClose={3000} closeButton={false} />
       <GlobalStyleComponent />
     </ThemeProvider>
   );

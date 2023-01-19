@@ -12,7 +12,7 @@ export default function Home() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          minHeight: 'calc(100vh - 64px)',
+          minHeight: 'calc(100vh - 96px)',
         }}
       >
         <MainTitle title="Your personal phonebook" />

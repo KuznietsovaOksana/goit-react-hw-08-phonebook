@@ -23,7 +23,9 @@ export const UserMenu = () => {
         variant="text"
         sx={{ color: 'white' }}
         type="button"
-        onClick={() => dispatch(logOut())}
+        onClick={() => {
+          dispatch(logOut());
+        }}
       >
         Logout
       </Button>

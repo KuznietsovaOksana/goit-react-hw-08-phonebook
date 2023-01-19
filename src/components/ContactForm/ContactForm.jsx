@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Box, Button, TextField } from '@mui/material';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -28,11 +31,12 @@ export const ContactForm = () => {
     };
     const isAtList = contacts.find(contact => contact.name === name);
     if (isAtList) {
-      alert('Already in list');
+      toast.warn('This name is already in contacts!');
       return;
     }
     dispatch(addContact(contact));
     event.target.reset();
+    toast.info('New contact was added!');
   };
 
   return (

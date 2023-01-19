@@ -22,6 +22,7 @@ export const Filter = () => {
             onChange={event => {
               const action = filterContacts(event.target.value);
               dispatch(action);
+              
             }}
           />
         </>
