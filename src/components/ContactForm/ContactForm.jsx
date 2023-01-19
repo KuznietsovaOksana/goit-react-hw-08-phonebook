@@ -5,8 +5,6 @@ import { selectContacts } from 'redux/contacts/selectors';
 import { Box, Button, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
-
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
